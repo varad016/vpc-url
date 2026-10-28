@@ -1,0 +1,11 @@
+version: apps/v1
+kind: service
+metdata:
+  name: url-service
+spec:
+  selector:
+    app: urls
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
