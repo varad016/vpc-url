@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: urls-init
+  labels:
+    app: urls
+spec:
+  backoffLimit: 4              # retries before the Job is marked Failed
+  template:
+    metadata:
+      labels:
+        app: urls-init
+    spec:
+      restartPolicy: OnFailure # Jobs only allow OnFailure or Never
+      containers:
+        - name: init
+          image: url-shortener:dev      # must match the tag you loaded into kind
+          imagePullPolicy: IfNotPresent
+          command: ["python", "init_db.py"]   # overrides the image's gunicorn CMD
+          envFrom:
+            - configMapRef:
+                name: urls-config
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: urls-secret
+                  key: DB_PASSWORD
