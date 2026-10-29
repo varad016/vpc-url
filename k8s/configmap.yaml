@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: urls-config
 data:
-  DB_HOST: "db-service"        # must match the Postgres Service name
+  DB_HOST: "postgres"        # must match the Postgres Service name
   DB_PORT: "5432"
   DB_NAME: "urlshortener"
   DB_USER: "postgres"

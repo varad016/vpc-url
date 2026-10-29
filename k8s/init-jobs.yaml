@@ -14,7 +14,7 @@ spec:
       restartPolicy: OnFailure # Jobs only allow OnFailure or Never
       containers:
         - name: init
-          image: url-shortener:dev      # must match the tag you loaded into kind
+          image: url-shortner:dev      # must match the tag you loaded into kind
           imagePullPolicy: IfNotPresent
           command: ["python", "init_db.py"]   # overrides the image's gunicorn CMD
           envFrom:
